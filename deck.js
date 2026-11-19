@@ -220,7 +220,15 @@
   function stepTitle(state) {
     if (!state) return config.ui.end;
     if (state.overview) return config.ui.overviewTitle;
-    const items = [config.brand.facts, config.team.members.map(item => item.name), config.problem.items.map(item => item.title), config.solution.items.map(item => item.title), config.tech.items.map(item => item.title), [config.funding.heading, ...config.funding.items.map(item => item.category]], []];
+    const items = [
+      config.brand.facts,
+      config.team.members.map(item => item.name),
+      config.problem.items.map(item => item.title),
+      config.solution.items.map(item => item.title),
+      config.tech.items.map(item => item.title),
+      [config.funding.heading].concat(config.funding.items.map(item => item.category)),
+      []
+    ];
     if (state.slide === 0 && state.step === 1) return config.brand.intro;
     return items[state.slide][state.step - (state.slide === 0 ? 2 : 1)] || config.slides[state.slide].title;
   }
